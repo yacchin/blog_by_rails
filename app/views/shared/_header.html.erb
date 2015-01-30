@@ -1,0 +1,31 @@
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+					<a class="brand" href="../">ITP::Blog</a>
+					<div class="nav-collapse">
+						<ul class="nav">
+							<li><a href="/posts/new">Create Blog</a></li>
+							<li><a href="http://172.16.108.174/projects/default" target="_blank">Gitlab</a></li>
+							<% if current_user %>
+							  <li><a href="/sessions/destroy" id="session"><%= current_user.name%>さんログアウト</a></li>
+							<% else %>
+							  <li><a href="/sessions/new" id="session">Sign In</a></li>
+							  <li><a href="/users/new" id="session">Sign Up</a></li>
+							<% end %>
+							<li>
+							<%= form_tag('/posts/search', :id => 'posts_search_text_field') do %>
+							<label style="font-size:13px;color:white;display: inline">Search:
+							  <%= text_field_tag :find_word %>
+							</label>
+							<% end %>
+						</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>

@@ -1,0 +1,66 @@
+/* New画面のBody入力欄の幅 */
+.control-group .controls .text_area {
+	width: 500px;
+}
+
+/* New画面下部のボタンバックグラウンドカラー */
+.span9 .form-horizontal .form-actions {
+	background-color: white;
+}
+
+/* New画面の入力欄の左の文字の位置 */
+.container .span9 .form-horizotal .control-group .control-label {
+	float: left;
+	margin-left: 90px;
+	margin-right: -40px;
+}
+
+/* New画面の入力欄を全体的に左へ */
+.container .row .span9 .form-horizontal .control-group {
+	margin-left: -70px;
+}
+
+/* New画面下部のボタンの位置 */
+.container .row .span9 .form-horizontal .form-actions {
+	margin-left: 185px;
+}
+
+/* Top画面のページネーションの位置 */
+.container .row .span9 .pagination {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+/* Top画面のページネーションの位置 */
+.a #session {
+	text-align: right;
+}
+
+/* ヘッダーの検索フォームの位置 */
+#posts_search_text_field {
+	display: inline;
+	margin-left: 12px;
+}
+
+/* ヘッダーの検索フォームの位置*/
+#find_word {
+	margin-top: 13px;
+	padding-bottom: -10px;
+	margin-left: 10px;
+}
+
+/* Show画面のcomment入力欄の幅 */
+#comment_text_field {
+	height: 50px;
+	width: 500px;
+}
+
+/* commentの位置*/
+#new_comment {
+	margin-top: 20px;
+}
+
+/* post_titleの位置*/
+#post_show_title {
+	margin-bottom: 30px;
+}

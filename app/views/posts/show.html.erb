@@ -1,0 +1,91 @@
+<%- model_class = Post -%>
+<div class="page-header">
+  <h1 id="post_show_title"><%=@post.title %></h1>
+
+  date:
+  <%=@post.created_at.to_s.split("\s")[0]%>
+</br>
+
+  <% url = "/users/" + @user.id.to_s %>
+  author:
+  <span class="lead">
+    <a href=<%=url%>><%= @user.name %></a>
+  </span>
+  </br>
+ 
+  tags:
+  <% @selected_tags.each do |tag|%>
+  <% url = "/tags/" + tag.id.to_s %>
+  <span class="lead">
+    <a href=<%=url%>><%= tag.name %> </a>
+  </span>
+  <% end %>
+
+</div>
+
+<div class="page-header">
+  
+<%= Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(@post.body).html_safe %>
+
+</div>
+
+<div class="page-header">
+
+  <% unless @comments.blank? %>
+    comments
+    <% count = 0%>
+    <% @comments.each do |comment| %>
+      <% if count % 3 == 1 %>
+        <div class="well" style="background-color: rgb(208, 241, 231)">
+      <% elsif count % 3 == 2 %>
+        <div class="well" style="background-color: rgb(225, 241, 208)">
+      <% else %>
+        <div class="well" style="background-color: rgb(241, 228, 208)">
+      <% end %>
+      <% url = "/users/" + comment.user_id.to_s %>
+      user:<a href=<%=url%>><%= User.find(comment.user_id).name %></a>
+      <br>
+      created_at:<%= comment.created_at %>
+      <br>
+      ---
+      <br>
+      <%= simple_format(comment.body) %>
+ 
+      </div>
+      <% count += 1 %>
+    <% end %>
+  <% else %>
+    no comment yet.
+    <br>
+  <% end %>
+
+  <% if session[:user_id]%>
+    <%= form_tag '/comments/create', :id => 'new_comment', :class => 'form-horizontal'  do  %>
+      <!-- Body -->
+      <div class="control-group">
+        <%= label :comment, :comment, :class => 'control-label' %>
+        <div class="controls">
+          <%= text_area :comment, :body, :class => 'text_area', placeholder: "ex. Thank you for posting.", :id => "comment_text_field" %>
+        </div>
+      </div>
+      <!-- Buttoms -->
+      <div class="form-actions">
+        <%= hidden_field_tag :post_id, @post.id %>
+        <%= submit_tag 'Leave a comment!', :class => 'btn btn-primary' %>
+      </div>
+    <% end %>
+  <% end %>
+
+</div>
+
+  <!-- Buttoms -->
+  <% if @user.id == session[:user_id] %>
+    <%= form_tag({:action => 'edit'},{:method => "get"}) do  %>
+      <%= submit_tag 'Update!', :class => 'btn btn-primary' %>
+    <% end %>
+
+    <%= form_tag({:action => 'destory'},{:method => "delete"}) do  %>
+      <%= hidden_field_tag :post_id, @post.id %>
+      <%= submit_tag 'Destroy!', :class => 'btn btn-info' %>
+    <% end %>
+  <% end %>

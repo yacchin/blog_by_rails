@@ -1,0 +1,19 @@
+<%- model_class = Post -%>
+<div class="page-header">
+  <h1>List</h1>
+</div>
+
+  <% count = 0 %>
+  <% @posts.each do |blog|%>
+    <% url = "/posts/" + blog.id.to_s %>
+    <div class="lead">
+      <span>
+        <%= @labels[count].html_safe %><%= blog.created_at.to_s.split("\s")[0] %><br><br><br>
+      </span>
+      <a href=<%=url%> style="margin-left:20px;"><%= blog.title %></a>
+    </div>
+    <% count += 1 %>
+  <% end %>
+
+<%= paginate @posts %>
+

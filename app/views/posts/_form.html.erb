@@ -1,0 +1,50 @@
+<%= form_tag '/posts', :id => 'new_post', :class => 'form-horizontal'  do  %>
+
+  <!-- Preview -->
+  <% if @preview %>
+    <div>Body Preview</div>
+    <br>
+    <div class="well">
+     <%= Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(@preview).html_safe %>
+    </div>
+  <% end %>
+
+  <!-- Title -->
+  <div class="control-group">
+    <%= label :title, :title, :class => 'control-label' %>
+    <div class="controls">
+      <%= text_field :post,:title, :class => 'text_field', placeholder: "ex. Blog create by Rails.", :size => 150 %>
+    </div>
+  </div>
+
+  <!-- CreateTag -->
+  <div class="control-group">
+    <%= label :new_tag, :new_tag, :class => 'control-label' %>
+    <div class="controls">
+      <%= text_field_tag 'new_tag[name]', @new_tag_name, placeholder: "ex. Rails4,Bootstrap,Sublime Text3" %>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="control-group">
+    <%= label :body, :body, :class => 'control-label' %>
+    <div class="controls">
+      <%= text_area :post, :body, :class => 'text_area', placeholder: "ex. sample
+      ---
+       * test
+        * test" %>
+    </div>
+  </div>
+
+  <!-- Buttoms -->
+  <div class="form-actions">
+    <%= submit_tag 'Post !', :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                posts_path, :class => 'btn' %>
+    <%= submit_tag "Preview !", :class => 'btn btn-info' %>
+  </div>
+
+<% end %>
+
+<script>
+</script>

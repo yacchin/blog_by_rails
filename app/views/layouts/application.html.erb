@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>ITP::Blog</title>
+		<%= stylesheet_link_tag    "application", :media => "all" %>
+		<%= javascript_include_tag "application" %>
+		<%= csrf_meta_tags %>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<%= favicon_link_tag 'favicon.ico' %>
+	</head>
+	<body>
+		<!--　ヘッダー　-->
+		<%= render "shared/header" %>
+
+		<!--　メインコンテンツ -->  
+		<div class="container">
+			<div class="row" id="wrapper">
+				<div class="span9">
+					<%= yield %>
+				</div>
+				<div class="span3">
+					<div class="page-header">
+						<h2>Tags</h2>
+					</div>
+					<div class="well">
+						<ul class="nav nav-list">
+				          <% @tags.each do |tag|%>
+						      <% url = "/tags/" + tag.id.to_s %>
+						      <% unless @tag_counter[tag.id].nil?%>
+						        <li>
+						    	    <a href=<%=url%>><%= tag.name %>(<%= @tag_counter[tag.id] %>)</a>
+						        </li>
+						      <% else %>
+						        <li>
+						    	    <a href=<%=url%>><%= tag.name %>(0)</a>
+						        </li>
+						      <% end %>
+						  <% end %>
+					    </ul>
+					</div> 
+					<div class="page-header">
+						<h2>Users</h2>
+					</div>
+					<div class="well">
+						<ul class="nav nav-list">
+						  <% @users.each do |user|%>
+						      <% url = "/users/" + user.id.to_s %>
+						      <% unless @user_counter[user.id].nil?%>
+						        <li >
+						    	    <a href=<%=url%>><%= user.name %>(<%= @user_counter[user.id] %>)</a>
+						        </li>
+						      <% else %>
+						        <li>
+						    	    <a href=<%=url%>><%= user.name %>(0)</a>
+						        </li>
+						      <% end %>
+						  <% end %>
+						</ul>
+					</div> 
+				</div>
+			</div>
+		</div>
+
+		<!--　フッター　-->
+		<%= render "shared/footer" %>
+
+		<!--　コンテンツ描画スクリプト -->
+		<script>
+		  $(document).ready(function() {
+		  	$('#wrapper').fadeIn("slow");
+		  });
+		</script>       
+	</body>
+</html>
